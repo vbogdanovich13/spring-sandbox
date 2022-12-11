@@ -1,20 +1,43 @@
 package by.vadzim13.sandbox;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
 
 @RestController
 @RequestMapping("/math")
 public class MathController {
+    private int x;
+    private int y;
+
+
     @GetMapping("add/{a}/{b}")
-    public Integer add(
-            @PathVariable("a") Integer a,
-            @PathVariable("b") Integer b
+    public static String add(
+            @PathVariable("a") String a,
+            @PathVariable("b") String b
+    ) }
+
     ) {
-        return a + b;
+        String word = a + b;
+        boolean isOnlyDigits = true;
+        for (int i = 0; i < word.length() && isOnlyDigits; i++) {
+            if (!Character.isDigit(word.charAt(i))) {
+                isOnlyDigits = false;
+                return String.valueOf(new ResponseEntity<>("Parameter a should be a number but 'no' is recieved",
+                        HttpStatus.BAD_REQUEST));
+            }
+        }
+
+        // return b + a;
+
+       // public Integer sum (Integer x = Integer.parseInt(a), Integer y = Integer.parseInt(b));
+        // return x + y;
+        //return word;
+        Integer a;
+
     }
+
 
     @GetMapping("multiply/{c}/{d}")
     public Integer multiply(
@@ -25,6 +48,7 @@ public class MathController {
     }
 
 }
+
 
 
 
