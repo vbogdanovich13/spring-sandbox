@@ -1,49 +1,47 @@
 package by.vadzim13.sandbox;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
 @RequestMapping("/math")
 public class MathController {
-    private int x;
-    private int y;
-
 
     @GetMapping("add/{a}/{b}")
-    public static String add(
-            @PathVariable("a") String a,
-            @PathVariable("b") String b
-    ) }
 
-    ) {
-        String word = a + b;
-        boolean isOnlyDigits = true;
-        for (int i = 0; i < word.length() && isOnlyDigits; i++) {
-            if (!Character.isDigit(word.charAt(i))) {
-                isOnlyDigits = false;
-                return String.valueOf(new ResponseEntity<>("Parameter a should be a number but 'no' is recieved",
-                        HttpStatus.BAD_REQUEST));
-            }
+    public ResponseEntity<String> add(@PathVariable("a") String a, @PathVariable("b") String b) {
+
+        if (!isValid(a)) {
+            return ResponseEntity.badRequest().body("Parameter a should be a number but '" + a +"' is recieved");
         }
+        if (!isValid(b)) {
+            return ResponseEntity.badRequest().body("Parameter a should be b number but '" + b + "' is recieved");
+        }
+        Integer aInt = Integer.parseInt(a);
+        Integer bInt = Integer.parseInt(b);
 
-        // return b + a;
-
-       // public Integer sum (Integer x = Integer.parseInt(a), Integer y = Integer.parseInt(b));
-        // return x + y;
-        //return word;
-        Integer a;
-
+        Integer sum = aInt + bInt;
+        return ResponseEntity.ok(sum.toString());
     }
 
+    private boolean isValid(String text) {
+        if (text == null || text.isEmpty()) {
+            return false;
+        }
+        for (int i = 0; i < text.length(); i++) {
+            if (!Character.isDigit(text.charAt(i))) {
+                return false;
+            }
 
+        }
+        return true;
+    }
     @GetMapping("multiply/{c}/{d}")
-    public Integer multiply(
-            @PathVariable("c") Integer c,
-            @PathVariable("d") Integer d
-    ) {
+    public Integer multiply(@PathVariable("c") Integer c, @PathVariable("d") Integer d) {
         return c * d;
     }
 
