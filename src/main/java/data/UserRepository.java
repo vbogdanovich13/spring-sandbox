@@ -1,20 +1,33 @@
 package data;
 
+import org.springframework.stereotype.Service;
 import service.model.User;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
+import java.util.*;
+@Service
+
 
 public class UserRepository {
-    users = new ArrayList<User>();
+
+    ArrayList<User> users = new ArrayList<User>();
+
+    public User createUser(User user) {
+       // UUID id = UUID.randomUUID();
+
+        users.add(new User());
+        return User;
+    }
+
+    public User findUser(String id) {
+        String id = "";
+        for (String id : users) {
+            id = id + users +"";
+        }
 
 
-
-
-    public void createUser() {
-
+    }
+    public User deleteUser(UUID id) {
+        users.removeIf(User -> )
     }
 
 }
