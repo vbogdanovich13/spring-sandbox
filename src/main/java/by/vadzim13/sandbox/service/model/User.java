@@ -1,4 +1,4 @@
-package service.model;
+package by.vadzim13.sandbox.service.model;
 
 import java.util.UUID;
 
